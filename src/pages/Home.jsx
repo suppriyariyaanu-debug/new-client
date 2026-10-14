@@ -1,53 +1,67 @@
 import { Link } from 'react-router-dom'
 import Icon from '../components/ui/Icon'
-import Logo from '../components/ui/Logo'
 import SearchCommand from '../components/sections/SearchCommand'
 import TrustStrip from '../components/sections/TrustStrip'
+import BusinessSolutions from '../components/sections/BusinessSolutions'
+import GrowthPartner from '../components/sections/GrowthPartner'
+import JourneySteps from '../components/sections/JourneySteps'
 import ServiceFinder from '../components/sections/ServiceFinder'
 import WhyChooseUs from '../components/sections/WhyChooseUs'
-import ProblemSolution from '../components/sections/ProblemSolution'
-import BusinessJourney from '../components/sections/BusinessJourney'
-import Collaborate from '../components/sections/Collaborate'
 import ServiceTabs from '../components/sections/ServiceTabs'
 import ServiceRecommender from '../components/sections/ServiceRecommender'
-import HowItWorks from '../components/sections/HowItWorks'
 import Testimonials from '../components/sections/Testimonials'
 import Partners from '../components/sections/Partners'
 import FaqSection from '../components/sections/FaqSection'
 import CtaBand from '../components/sections/CtaBand'
 import { getService } from '../data/catalogue'
-import { company, trustPoints } from '../data/company'
+import { company } from '../data/company'
+import { stagePaths } from '../data/growth'
 
-const quickLinks = ['gst', 'udyam', 'company', 'trademark', 'itr']
+const quickLinks = ['gst', 'company', 'fssai', 'trademark', 'itr']
+
+/**
+ * Smooth-scrolls to an in-page section. Used instead of a plain #hash link so
+ * the button works on every click, not only the first.
+ */
+function scrollToSection(event, id) {
+  const target = document.getElementById(id)
+  if (!target) return
+  event.preventDefault()
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  window.history.replaceState(null, '', `#${id}`)
+}
 
 function Home() {
   return (
     <>
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="hero">
+      <section className="hero hero--growth">
         <div className="hero__glow" aria-hidden="true" />
         <div className="container hero__inner">
           <div className="hero__content">
-            <p className="eyebrow">Business today. A stronger tomorrow.</p>
+            <p className="eyebrow">{company.tagline}</p>
 
             <h1>
-              Your Business Journey
-              <span>Our Expertise</span>
+              Your Business Journey.
+              <span>Our Partnership.</span>
             </h1>
 
             <p className="hero__lede">
-              From starting your business to managing, protecting and growing it, Udyama Kendra
-              connects you with the right services, guidance and support at every stage.
+              From starting your business to managing compliance and exploring growth
+              opportunities, we help you navigate every stage of your entrepreneurial journey.
             </p>
 
             <div className="hero__actions">
-              <Link to="/contact" className="btn btn--primary btn--lg">
-                Get Started
+              <Link to="/services/category/start-business" className="btn btn--primary btn--lg">
+                Start Your Business
                 <Icon name="arrowRight" size={18} />
               </Link>
-              <a href={company.phoneHref} className="btn btn--outline btn--lg">
-                <Icon name="phone" size={17} />
-                Talk to an Expert
+              <a
+                href="#business-solutions"
+                className="btn btn--outline btn--lg"
+                onClick={(event) => scrollToSection(event, 'business-solutions')}
+              >
+                Explore Business Solutions
               </a>
             </div>
 
@@ -68,63 +82,62 @@ function Home() {
             </div>
           </div>
 
-          {/* The right column carries the brand itself: the company's own logo
-              at a size the header cannot give it, its published tagline, and
-              the four reasons businesses stay with it. The service-pillar list
-              that used to sit here has gone — those six pillars are reachable
-              from "What do you need help with?" immediately below, so this
-              space now answers "who is this and why them?" instead of
-              repeating the catalogue. */}
-          <aside className="hero__brand" aria-label="About Udyama Kendra">
-            <Logo interactive={false} size="lg" className="hero__brand-logo" />
-
-            <p className="hero__brand-tagline">{company.tagline}</p>
-
-            <p className="hero__brand-label">Why businesses choose us</p>
-            <ul className="hero__brand-points">
-              {trustPoints.map((point) => (
-                <li key={point}>
-                  <Icon name="check" size={16} />
-                  {point}
+          {/* Right column: three quick paths by stage, each to a real category. */}
+          <aside className="hero__brand hero__stages" aria-labelledby="hero-stages-title">
+            <p className="hero__brand-label" id="hero-stages-title">
+              Where are you today?
+            </p>
+            <ul className="stage-list">
+              {stagePaths.map((path) => (
+                <li key={path.to}>
+                  <Link to={path.to} className="stage-link">
+                    <span className="stage-link__icon">
+                      <Icon name={path.icon} size={20} />
+                    </span>
+                    <span className="stage-link__body">
+                      <strong>{path.label}</strong>
+                      <span>{path.hint}</span>
+                    </span>
+                    <Icon name="arrowRight" size={16} className="stage-link__go" />
+                  </Link>
                 </li>
               ))}
             </ul>
 
-            <p className="hero__brand-foot">
-              <Icon name="globe" size={15} />
-              {company.locations.join(' · ')}
-            </p>
+            <div className="hero__stages-foot">
+              <p>Not sure? Tell us your idea and we will suggest the next steps.</p>
+              <Link to="/contact?plan=start" className="link-arrow">
+                Talk to us
+                <Icon name="arrowRight" size={15} />
+              </Link>
+            </div>
           </aside>
         </div>
       </section>
 
-      {/* Published figures, immediately under the hero. */}
-      <TrustStrip />
+      {/* Only shown once the client supplies its own figures (config/brand.js). */}
+      {company.show.stats ? <TrustStrip /> : null}
 
-      {/* Order below follows the approved homepage flow:
-          need → why us → problem → how we help you grow → how we collaborate
-          → services and solutions → supporting proof → closing CTA. */}
+      <BusinessSolutions id="business-solutions" />
+      <GrowthPartner />
+      <JourneySteps />
+
+      {/* Existing service catalogue, preserved. */}
       <ServiceFinder />
-      <WhyChooseUs />
-      <ProblemSolution />
-      <BusinessJourney />
-      <Collaborate />
-
-      {/* Services / solutions. `solutions` is the anchor the header links to. */}
       <ServiceTabs id="solutions" />
       <ServiceRecommender />
+      <WhyChooseUs />
 
-      <HowItWorks />
-      {/* The team section lives on /about (anchored at #team, which is where
-          the header's "Team" link points). It is deliberately not repeated
-          here — the homepage stays on the customer's business needs. */}
-      <Testimonials />
-      <Partners />
+      {company.show.testimonials ? <Testimonials /> : null}
+      {company.show.partners ? <Partners /> : null}
       <FaqSection />
 
       <CtaBand
-        title="Ready to take your business forward?"
-        description="Talk to a Udyama Kendra expert today."
+        id="get-started"
+        title="Every Great Business Starts With the Right Partner."
+        description="Tell us about your business idea. We'll help you explore the next steps."
+        primaryLabel="Let's Grow Together"
+        primaryTo="/contact?plan=grow"
       />
     </>
   )

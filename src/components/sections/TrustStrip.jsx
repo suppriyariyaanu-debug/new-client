@@ -1,5 +1,5 @@
 import Icon from '../ui/Icon'
-import { stats } from '../../data/company'
+import { company, stats } from '../../data/company'
 
 /**
  * Published business figures. See the note on `stats` in data/company.js —
@@ -7,7 +7,7 @@ import { stats } from '../../data/company'
  */
 function TrustStrip() {
   return (
-    <section className="trust-strip" aria-label="Udyama Kendra at a glance">
+    <section className="trust-strip" aria-label={`${company.name} at a glance`}>
       <div className="container trust-strip__inner">
         {stats.map((stat) => (
           <div className="trust-stat" key={stat.label}>

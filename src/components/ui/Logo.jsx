@@ -1,35 +1,78 @@
 import { Link } from 'react-router-dom'
 import { company } from '../../data/company'
-import logo from '../../assets/brand/udyama-kendra-logo.png'
 
 /**
- * The company's own logo, used as supplied — not redrawn or recoloured.
+ * Brand logo — a typeset wordmark with an inline SVG mark.
  *
- * Imported rather than referenced as /images/... so Vite resolves and
- * fingerprints it. An absolute path only works when the site is served from a
- * domain root; under any sub-path it 404s and the browser shows a broken
- * image, which is exactly what happened in the hosted preview.
+ * Rendered from `company.name` (src/config/brand.js), so renaming the brand
+ * renames the logo everywhere with no image to redraw. When the client
+ * supplies a final logo file, place it in src/assets/brand/ and swap the
+ * <span className="logo__mark"> / logo__name pair for an <img>.
  *
- * `interactive={false}` renders the same mark without a link, for places that
- * are already on the page it would navigate to — the homepage hero, for one.
- * `size="lg"` is the larger homepage treatment; the header stays compact.
+ * Names such as "VyapaarSetu" are split at the first internal capital so the
+ * second half can carry the accent colour ("Vyapaar" + "Setu").
  */
+function splitName(name) {
+  const match = name.match(/^([A-Z]?[a-z]+)([A-Z].*)$/)
+  return match ? [match[1], match[2]] : [name, '']
+}
+
+function Mark() {
+  return (
+    <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="logo-mark-gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#1464d2" />
+          <stop offset="1" stopColor="#13a89e" />
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="11" fill="url(#logo-mark-gradient)" />
+      <path
+        d="M11 27.5 18.5 19l4.5 4.5L29.5 14"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="3.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="29.5" cy="14" r="2.8" fill="#fff" />
+    </svg>
+  )
+}
+
 function Logo({ inverse = false, to = '/', interactive = true, size = 'md', className = '' }) {
-  const classes = `logo${size !== 'md' ? ` logo--${size}` : ''}${
+  const classes = `logo logo--text${size !== 'md' ? ` logo--${size}` : ''}${
     inverse ? ' logo--inverse' : ''
   }${className ? ` ${className}` : ''}`
 
-  const image = (
-    <img src={logo} alt={`${company.name} — ${company.tagline}`} width="250" height="114" />
+  const [first, second] = splitName(company.name)
+
+  const content = (
+    <>
+      <span className="logo__mark">
+        <Mark />
+      </span>
+      <span className="logo__text">
+        <span className="logo__name">
+          {first}
+          {second ? <span className="logo__name-accent">{second}</span> : null}
+        </span>
+        <span className="logo__tagline">{company.tagline}</span>
+      </span>
+    </>
   )
 
   if (!interactive) {
-    return <span className={classes}>{image}</span>
+    return (
+      <span className={classes} role="img" aria-label={`${company.name} — ${company.tagline}`}>
+        {content}
+      </span>
+    )
   }
 
   return (
     <Link to={to} className={classes} aria-label={`${company.name} — home`}>
-      {image}
+      {content}
     </Link>
   )
 }

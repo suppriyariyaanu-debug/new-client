@@ -58,6 +58,18 @@ const intents = [
     },
   },
   {
+    id: 'food',
+    keywords: ['restaurant', 'cafe', 'café', 'food', 'cloud kitchen', 'bakery', 'catering', 'hotel', 'dhaba', 'canteen'],
+    reply: {
+      text: 'For a food business we can help you work out what applies — business structure, GST where required, FSSAI registration or licence depending on your scale, local licences, and accounts after you open. Requirements vary by business and location, so the team confirms them for you.',
+      links: [
+        { label: 'Restaurants & cafés enquiry', to: '/contact?plan=restaurant' },
+        { label: 'FSSAI registration', to: '/services/fssai' },
+        { label: 'GST registration', to: '/services/gst' },
+      ],
+    },
+  },
+  {
     id: 'start',
     keywords: ['start', 'register a company', 'incorporate', 'incorporation', 'private limited', 'pvt', 'llp', 'opc', 'proprietorship', 'partnership', 'new business'],
     reply: {

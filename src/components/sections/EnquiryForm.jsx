@@ -38,9 +38,10 @@ function validate(values) {
  * Replaces the previous handler, which fired an alert() and cleared itself
  * without validating anything.
  */
-function EnquiryForm({ serviceName, compact = false }) {
+function EnquiryForm({ serviceName, topic, initialRequirement = '', compact = false }) {
   const baseId = useId()
-  const [values, setValues] = useState(EMPTY)
+  const initial = { ...EMPTY, requirement: initialRequirement }
+  const [values, setValues] = useState(initial)
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
   const [status, setStatus] = useState('idle') // idle | submitting | done | error
@@ -78,9 +79,9 @@ function EnquiryForm({ serviceName, compact = false }) {
 
     setStatus('submitting')
     try {
-      await submitLead({ ...values, service: serviceName || 'General enquiry' })
+      await submitLead({ ...values, service: serviceName || topic || 'General enquiry', topic: topic || null })
       setStatus('done')
-      setValues(EMPTY)
+      setValues(initial)
       setTouched({})
     } catch {
       setStatus('error')
@@ -96,7 +97,7 @@ function EnquiryForm({ serviceName, compact = false }) {
         <h3>Enquiry received</h3>
         <p>
           Thank you. Our team will get in touch about
-          {serviceName ? ` ${serviceName}` : ' your requirement'} during business hours.
+          {serviceName || topic ? ` ${serviceName || topic}` : ' your requirement'} during business hours.
         </p>
         <button type="button" className="btn btn--outline btn--sm" onClick={() => setStatus('idle')}>
           Send another enquiry

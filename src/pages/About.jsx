@@ -22,7 +22,7 @@ function About() {
 
           <p className="eyebrow">{positioning.eyebrow}</p>
           <h1>
-            A single window for
+            A growth partner for
             <span> Indian business</span>
           </h1>
           <p className="page-hero__lede">{positioning.statement}</p>
@@ -36,7 +36,7 @@ function About() {
             <p>{positioning.servicesIntro}</p>
             <p>
               From incorporation and licences through to filings, intellectual property,
-              technology and finance, Udyama Kendra spans {categories.length} service
+              technology and finance, {company.name} spans {categories.length} service
               categories — so a growing business does not have to hold relationships with a
               different specialist for every requirement.
             </p>
@@ -149,8 +149,8 @@ function About() {
       </section>
 
       <Team />
-      <Testimonials />
-      <Partners />
+      {company.show.testimonials ? <Testimonials /> : null}
+      {company.show.partners ? <Partners /> : null}
       <CtaBand />
     </>
   )

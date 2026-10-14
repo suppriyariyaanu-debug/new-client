@@ -71,7 +71,7 @@ function ServicePage() {
             <article className="prose">
               <h2>About this service</h2>
               <p>
-                Udyama Kendra provides simple, transparent and professional assistance for
+                {company.name} provides simple, transparent and professional assistance for
                 businesses. Our team helps you understand the process, prepare the required
                 documents and complete the necessary formalities.
               </p>

@@ -2,7 +2,7 @@ import Icon from '../ui/Icon'
 import Reveal from '../ui/Reveal'
 import SectionHead from '../ui/SectionHead'
 import { benefits } from '../../data/journeys'
-import { positioning } from '../../data/company'
+import { company, positioning } from '../../data/company'
 
 function WhyChooseUs() {
   return (
@@ -10,7 +10,7 @@ function WhyChooseUs() {
       <div className="container">
         <SectionHead
           eyebrow="Why us"
-          title="Why choose Udyama Kendra?"
+          title={`Why choose ${company.name}?`}
           description={positioning.differenceIntro}
           center
         />
@@ -18,7 +18,7 @@ function WhyChooseUs() {
         {/* Each benefit is one entry in `benefits` (src/data/journeys.js).
             The list is data-driven so the client can add, reword or reorder
             points — including verified differences, once supplied — by editing
-            that array alone. Nothing here compares Udyama Kendra to a named
+            that array alone. Nothing here compares the business to a named
             competitor, because no such comparison has been provided. */}
         <div className="benefit-grid">
           {benefits.map((benefit, index) => (

@@ -1,28 +1,26 @@
-import pavanKumar from '../assets/team/PavanKumar.jpg'
-import csvPrasad from '../assets/team/CSVPrasad.jpg'
-import ram from '../assets/team/Ram.jpg'
-import shivaprasad from '../assets/team/Shivaprasad.jpg'
+import { brand } from '../config/brand'
 
 /**
- * Udyama Kendra company information.
+ * Company information.
  *
- * Every string in this file is reproduced from the previous Udyama Kendra
- * website (https://udyama-kendra-ram-s-project.vercel.app/). Nothing here is
- * invented. Where a fact was not published (street address, counter figures),
- * it is absent rather than guessed.
+ * Name, tagline and contact details come from src/config/brand.js, so the
+ * brand can be renamed in one place. The other exports below (stats,
+ * testimonials, partners, team) were carried over from the source project;
+ * see the `show` switches in brand.js before displaying any of them.
  */
 
 export const company = {
-  name: 'Udyama Kendra',
-  tagline: 'A Single Window Business Service',
-  phone: '+91 959 123 9899',
-  phoneHref: 'tel:+919591239899',
-  // Business decision: the displayed address is authoritative.
-  email: 'enquiry@udyamakendra.com',
-  emailHref: 'mailto:enquiry@udyamakendra.com',
-  hours: 'Mon - Sat: 9.30 AM to 6.30 PM',
-  locations: ['India', 'UAE', 'Singapore'],
-  copyright: 'Udyama Kendra. All Rights Reserved',
+  name: brand.name,
+  tagline: brand.tagline,
+  description: brand.description,
+  phone: brand.phone,
+  phoneHref: brand.phoneHref,
+  email: brand.email,
+  emailHref: brand.emailHref,
+  hours: brand.hours,
+  locations: brand.locations,
+  copyright: `${brand.name}. All Rights Reserved`,
+  show: brand.show,
 }
 
 /**
@@ -42,12 +40,12 @@ export const stats = [
   { value: '3', label: 'Global Locations', icon: 'globe' },
 ]
 
-/** Hero trust points, drawn from the published differentiators. */
+/** Short trust points (descriptive of the service model, not claims of results). */
 export const trustPoints = [
-  'Reliable Support',
-  'Industry Specialists',
-  'On-time Service',
-  'Long-term Partnerships',
+  'Guidance at every stage',
+  'Clear process, fee confirmed upfront',
+  'Registration, compliance and growth in one place',
+  'Support that continues after launch',
 ]
 
 /**
@@ -59,7 +57,7 @@ export const pillars = [
     icon: 'building',
     title: 'Company Registration',
     description:
-      'We help entrepreneurs navigate the complexities of setting up a business in India, ensuring the comply with legal requirements for business growth',
+      'We help entrepreneurs navigate the complexities of setting up a business in India, ensuring they comply with legal requirements for business growth',
     categorySlug: 'start-business',
   },
   {
@@ -112,17 +110,15 @@ export const differentiators = [
 ]
 
 /**
- * Team, exactly as published — real photographs supplied by the business.
- *
- * The images are imported rather than referenced by an absolute URL so Vite
- * fingerprints them and resolves the path correctly whatever base the site is
- * served from. Names and designations are as given and must not be altered.
+ * Team, exactly as published. Photographs have been removed at the client's
+ * request; the portrait frame on each card is intentionally left blank.
+ * Names and designations are as given and must not be altered.
  */
 export const team = [
-  { name: 'Pavan Kumar', role: 'Global Evangelist', image: pavanKumar },
-  { name: 'CSV Prasad', role: 'Global Advisor', image: csvPrasad },
-  { name: 'Ram', role: 'Founder', image: ram },
-  { name: 'Shivaprasad', role: 'Business Advisor', image: shivaprasad },
+  { name: 'Pavan Kumar', role: 'Global Evangelist' },
+  { name: 'CSV Prasad', role: 'Global Advisor' },
+  { name: 'Ram', role: 'Founder' },
+  { name: 'Shivaprasad', role: 'Business Advisor' },
 ]
 
 export const teamIntro =
@@ -164,11 +160,11 @@ export const partners = [
   { name: 'Spectra', logo: '/images/partners/spectra.png' },
 ]
 
-/** How the business describes itself, verbatim from the previous site. */
+/** How the business describes itself. */
 export const positioning = {
   eyebrow: 'BUSINESS CONSULTING',
   statement:
-    'We assists entrepreneurs in establishing a new business by providing consulting and guidance on business registration, licensing, and compliance with legal requirements.',
+    'We help entrepreneurs establish and grow their businesses, with guidance on business registration, licensing, compliance and the decisions that follow launch.',
   servicesIntro:
     'Understanding and effectively managing core services is vital for any organization aiming to achieve long-term success and customer loyalty',
   differenceIntro: 'We stand out is the wide array of services we offer under one roof.',

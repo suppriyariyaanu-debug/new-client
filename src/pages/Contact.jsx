@@ -1,9 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/ui/Icon'
 import EnquiryForm from '../components/sections/EnquiryForm'
 import { company } from '../data/company'
+import { getService } from '../data/catalogue'
+import { getEnquiryTopic } from '../data/growth'
 
 function Contact() {
+  // ?plan=<id> arrives from the homepage cards and CTAs; it pre-fills the form.
+  const [params] = useSearchParams()
+  const plan = params.get('plan')
+  const topic = getEnquiryTopic(plan)
+  const topicServices = topic ? topic.services.map(getService).filter(Boolean) : []
+
   return (
     <>
       <section className="page-hero">
@@ -30,6 +38,25 @@ function Contact() {
         <div className="container contact-grid">
           <div className="contact-info">
             <h2>Get in touch</h2>
+
+            {topic ? (
+              <div className="contact-topic">
+                <p className="contact-topic__label">You are enquiring about</p>
+                <strong>{topic.title}</strong>
+                {topicServices.length ? (
+                  <>
+                    <p>Services that are often relevant — we will confirm what applies to you:</p>
+                    <ul className="contact-topic__chips">
+                      {topicServices.map((service) => (
+                        <li key={service.slug}>
+                          <Link to={`/services/${service.slug}`}>{service.name}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+              </div>
+            ) : null}
 
             <ul className="contact-list">
               <li>
@@ -84,7 +111,11 @@ function Contact() {
               <h2>Send an enquiry</h2>
               <p>Fields marked with an asterisk are required.</p>
             </header>
-            <EnquiryForm />
+            <EnquiryForm
+              key={plan || 'general'}
+              topic={topic?.title}
+              initialRequirement={topic?.requirement ?? ''}
+            />
           </div>
         </div>
       </section>

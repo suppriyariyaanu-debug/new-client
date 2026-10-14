@@ -1,3 +1,5 @@
+import { company } from './company'
+
 /**
  * Homepage information architecture.
  *
@@ -110,7 +112,7 @@ export const problemPoints = [
 
 /**
  * "How can we collaborate with you to grow?" — the ways a business works with
- * Udyama Kendra. Descriptive of the service model only; no packages, prices or
+ * the business. Descriptive of the service model only; no packages, prices or
  * commitments are stated here because none have been published.
  */
 export const collaborationModes = [
@@ -286,7 +288,7 @@ export const recommender = [
   },
 ]
 
-/** Six reasons to choose Udyama Kendra, drawn from the published differentiators. */
+/** Six reasons to choose the business. */
 export const benefits = [
   {
     icon: 'layers',
@@ -314,8 +316,8 @@ export const benefits = [
   },
   {
     icon: 'globe',
-    title: 'Pan-India Support',
-    description: 'Serving businesses across India, with a presence in the UAE and Singapore.',
+    title: 'Support Wherever You Are',
+    description: 'Reach the team by phone, email, chat or the enquiry form — guidance does not depend on visiting an office.',
   },
   {
     icon: 'checkCircle',
@@ -325,7 +327,7 @@ export const benefits = [
   },
 ]
 
-/** The five steps of working with Udyama Kendra. */
+/** The five steps of working with the business. */
 export const processSteps5 = [
   { step: '01', title: 'Tell us what you need', description: 'Share your requirement through the site or over a call.' },
   { step: '02', title: 'Talk to an expert', description: 'We confirm what applies to your business and the fee before starting.' },
@@ -337,7 +339,7 @@ export const processSteps5 = [
 /** Homepage FAQs. Answers stay within what the business has actually published. */
 export const homeFaqs = [
   {
-    question: 'What services does Udyama Kendra provide?',
+    question: `What services does ${company.name} provide?`,
     answer:
       'Business registration and incorporation, tax and MSME registrations, licences and certifications, statutory compliance and filings, trademark and patent services, IT and web solutions, and corporate banking and loans — across five service categories.',
   },
@@ -357,13 +359,14 @@ export const homeFaqs = [
       'Where a service has a published starting price it is shown on that service page. For everything else our team confirms the fee for your specific requirement before any work begins.',
   },
   {
-    question: 'Can Udyama Kendra help with GST?',
+    question: `Can ${company.name} help with GST?`,
     answer:
       'Yes — both GST registration and ongoing GST returns filing, alongside income tax, TDS and ROC filings.',
   },
   {
     question: 'How do I contact an expert?',
     answer:
-      'Call +91 959 123 9899 or email enquiry@udyamakendra.com during office hours, Mon - Sat 9.30 AM to 6.30 PM. You can also send an enquiry from any service page and the team will come back to you.',
+      `Call ${company.phone} or email ${company.email} during office hours, ${company.hours}. ` +
+      'You can also send an enquiry from any service page and the team will come back to you.',
   },
 ]

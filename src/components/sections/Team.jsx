@@ -1,14 +1,14 @@
 import Avatar from '../ui/Avatar'
 import Reveal from '../ui/Reveal'
 import SectionHead from '../ui/SectionHead'
-import { team, teamIntro } from '../../data/company'
+import { company, team, teamIntro } from '../../data/company'
 
 /**
  * The team.
  *
- * Four across on desktop, two on tablet, a swipeable rail on phones. Every
- * portrait is cropped to the same square by the Avatar component, so photos
- * of different dimensions still line up.
+ * Four across on desktop, two on tablet, a swipeable rail on phones. The
+ * portrait frames are intentionally blank (photos removed at the client's
+ * request).
  */
 function Team({ id = 'team' }) {
   return (
@@ -16,7 +16,7 @@ function Team({ id = 'team' }) {
       <div className="container">
         <SectionHead
           eyebrow="Our Team"
-          title="The people behind Udyama Kendra"
+          title={`The people behind ${company.name}`}
           description={teamIntro}
           center
         />
@@ -24,7 +24,7 @@ function Team({ id = 'team' }) {
         <div className="team-grid">
           {team.map((member, index) => (
             <Reveal className="team-card" key={member.name} delay={index * 70}>
-              <Avatar src={member.image} name={member.name} />
+              <Avatar />
               <div className="team-card__body">
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>

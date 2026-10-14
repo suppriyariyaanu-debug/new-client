@@ -1,7 +1,7 @@
 /**
- * Udyama Kendra service catalogue.
+ * Service catalogue.
  *
- * SOURCE OF TRUTH: the service taxonomy published on the previous Udyama Kendra
+ * SOURCE OF TRUTH: the service taxonomy published on the source project's
  * website (https://udyama-kendra-ram-s-project.vercel.app/) — 5 categories,
  * 19 groups, 106 services. Service names are reproduced exactly as published.
  *

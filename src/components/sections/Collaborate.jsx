@@ -8,7 +8,7 @@ import { company } from '../../data/company'
 /**
  * "How can we collaborate with you to grow?"
  *
- * Describes how working with Udyama Kendra actually goes, then offers the two
+ * Describes how working with the business actually goes, then offers the two
  * site-wide actions. Both reuse the existing handlers — the contact route and
  * the published phone number — rather than introducing a new path.
  */

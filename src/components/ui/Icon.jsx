@@ -263,6 +263,33 @@ const paths = {
       <path d="M20 14h-2.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1H19a1 1 0 0 0 1-1z" />
     </>
   ),
+  coffee: (
+    <>
+      <path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" />
+      <path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" />
+      <path d="M8 3.5c0 1 1 1.4 1 2.5M12 3.5c0 1 1 1.4 1 2.5" />
+    </>
+  ),
+  shoppingBag: (
+    <>
+      <path d="M5 7.5h14l-1 12.5H6z" />
+      <path d="M9 10V6.5a3 3 0 0 1 6 0V10" />
+    </>
+  ),
+  factory: (
+    <>
+      <path d="M3 20.5V10l5 3V10l5 3V10l5 3V4h3v16.5z" />
+      <path d="M7 17h2M12 17h2M17 17h1" />
+    </>
+  ),
+  rocket: (
+    <>
+      <path d="M12 15.5 8.5 12C10 7 13.5 3.8 20 4c.2 6.5-3 10-8 11.5z" />
+      <path d="M8.5 12H5l2.5-3.5h4M12 15.5V19l3.5-2.5v-4" />
+      <path d="M6.5 17.5c-1 .4-2 1.6-2 3 1.4 0 2.6-1 3-2" />
+      <circle cx="15" cy="9" r="1.4" />
+    </>
+  ),
 }
 
 const filled = new Set(['quote', 'zap', 'star'])

@@ -4,6 +4,7 @@ import Icon from '../components/ui/Icon'
 import ServiceCard from '../components/sections/ServiceCard'
 import CtaBand from '../components/sections/CtaBand'
 import { allServices, categories } from '../data/catalogue'
+import { company } from '../data/company'
 
 function Services() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -69,7 +70,7 @@ function Services() {
             <span> made simple</span>
           </h1>
           <p className="page-hero__lede">
-            Everything Udyama Kendra handles, across {categories.length} categories. Search,
+            Everything {company.name} handles, across {categories.length} categories. Search,
             filter, and start where you need to.
           </p>
         </div>

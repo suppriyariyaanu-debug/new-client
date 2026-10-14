@@ -17,8 +17,8 @@ function Footer() {
           <div className="footer__about">
             <Logo inverse />
             <p>
-              {company.tagline} — start, manage, protect and grow your business from one
-              place.
+              {company.name} is your business growth partner — helping you start, manage,
+              protect and grow your business, one stage at a time.
             </p>
 
             <address className="footer__contact">
@@ -68,7 +68,7 @@ function Footer() {
           <Link to="/services">All Services</Link>
           <Link to="/about">About Us</Link>
           <Link to="/about#team">Our Team</Link>
-          <Link to="/about#partners">Partners</Link>
+          {company.show.partners ? <Link to="/about#partners">Partners</Link> : null}
           <Link to="/contact">Contact</Link>
           <Link to="/login">Client Login</Link>
         </div>
